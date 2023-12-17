@@ -9,6 +9,6 @@ const alunoController = new AlunoController();
 app.post("/aluno", alunoController.criarAluno);
 
 app.listen(3008, () => {
-    console.log("Api está rodando!");
+    console.log("API está rodando!");
     
 });
