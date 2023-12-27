@@ -36,5 +36,40 @@ export class AlunoController {
 
         }
     }
+
+    public async obterAluno(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+
+            const aluno = await repository.aluno.findUnique({
+                where: {
+                    id,
+                },
+            });
+
+            if (!aluno) {
+                return res.status(404).send({
+                    ok: false,
+                    message: "Aluno não encontrado",
+                });
+            }
+
+            return res.status(200).send({
+                ok: true,
+                message: "Aluno obtido com sucesso",
+                data: aluno,
+            });
+        } catch (error: any) {
+            return res.status(500).send({
+                ok: false,
+                message: error.toString(),
+            });
+        }
+    }
+
 }
+
+
+
+
     
