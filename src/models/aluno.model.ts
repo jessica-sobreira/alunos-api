@@ -12,6 +12,5 @@ export class Aluno {
     }
  }
 
- const larissa = new Aluno ('Larissa', 'l@l.com', '123');
  
 
