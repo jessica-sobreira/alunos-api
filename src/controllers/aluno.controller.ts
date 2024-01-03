@@ -94,9 +94,12 @@ export class AlunoController {
                 },
             });
 
-            // if (!aluno) {
-            //     return erroNaoEncontrado(res, "Aluno");
-            // }
+            if (!aluno) {
+                return res.status(404).send({
+                    ok: false,
+                    message: "Aluno não encontrado",
+                })
+            }
 
             // atualizar os dados do aluno
             const result = await repository.aluno.update({
@@ -115,6 +118,7 @@ export class AlunoController {
                 message: "Aluno atualizado com sucesso",
                 data: result,
             });
+            
         } catch (error: any) {
             return res.status(500).send({
                 ok: false,
@@ -156,7 +160,7 @@ export class AlunoController {
                 ok: true,
                 message: "Aluno deletado com sucesso",
             });
-            
+
         } catch (error: any) {
             return res.status(500).send({
                 ok: false,
