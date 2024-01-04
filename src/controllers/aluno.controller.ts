@@ -7,7 +7,6 @@ export class AlunoController {
     // Criar um novo aluno
     public async criarAluno(req: Request, res: Response) {
         try {
-            // 1- Entrada
             const { nome, email, senha, idade } = req.body;
 
             if (!nome || !email || !senha) {
@@ -17,14 +16,12 @@ export class AlunoController {
                 });
             }
 
-            // 2- Processamento
             const aluno = new Aluno(nome, email, senha, idade);
 
             const result = await repository.aluno.create({
                 data: aluno,
             });
 
-            // 3- Saída
             return res.status(201).send({
                 ok: true,
                 message: "Usuário criado com sucesso",
@@ -41,10 +38,8 @@ export class AlunoController {
     // Obter um aluno pelo ID
     public async obterAluno(req: Request, res: Response) {
         try {
-            // 1- Entrada
             const { id } = req.params;
 
-            // 2- Processamento
             const aluno = await repository.aluno.findUnique({
                 where: {
                     id,
@@ -58,7 +53,6 @@ export class AlunoController {
                 });
             }
 
-            // 3- Saída
             return res.status(200).send({
                 ok: true,
                 message: "Aluno obtido com sucesso",
@@ -75,7 +69,7 @@ export class AlunoController {
     // PUT - atualizar um aluno
     public async atualizarAluno(req: Request, res: Response) {
         try {
-            // 1- Entrada
+
             const { id } = req.params;
             const { nome, idade } = req.body;
 
@@ -86,7 +80,6 @@ export class AlunoController {
                 });
             }
 
-            // 2- Processamento
             // verificar se o aluno existe
             const aluno = await repository.aluno.findUnique({
                 where: {
@@ -112,7 +105,7 @@ export class AlunoController {
                 },
             });
 
-            // 3- Saída
+
             return res.status(200).send({
                 ok: true,
                 message: "Aluno atualizado com sucesso",
@@ -130,10 +123,8 @@ export class AlunoController {
     // DELETE - deletar um aluno
     public async deletarAluno(req: Request, res: Response) {
         try {
-            // 1- Entrada
             const { id } = req.params;
 
-            // 2- Processamento
             // verificar se o aluno existe, se não 404
             const aluno = await repository.aluno.findUnique({
                 where: {
@@ -155,7 +146,6 @@ export class AlunoController {
                 },
             });
 
-            // 3- Saída
             return res.status(200).send({
                 ok: true,
                 message: "Aluno deletado com sucesso",

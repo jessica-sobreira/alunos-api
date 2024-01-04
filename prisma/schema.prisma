@@ -18,6 +18,8 @@ model Aluno {
 
   idade Int? @db.SmallInt
 
+  endereco Endereco?
+
   dhrCriacao DateTime @default(now()) @map("dhr_criacao")
   dhrAtualizacao DateTime @updatedAt @map("dhr_atualizacao")
 
@@ -25,3 +27,18 @@ model Aluno {
 
 }
 
+model Endereco {
+  idAluno String @db.Uuid @id @map("id_aluno") 
+  rua String @db.VarChar(30)
+  cidade String @db.VarChar(30)
+  uf String @db.Char(2)
+
+  aluno Aluno @relation(fields: [idAluno], references: [id])
+
+  dhrCriacao DateTime @default(now()) @map("dhr_criacao")
+  dhrAtualizacao DateTime @updatedAt @map("dhr_atualizacao")
+
+
+  @@map("endereco")
+
+}
