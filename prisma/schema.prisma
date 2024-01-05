@@ -19,6 +19,7 @@ model Aluno {
   idade Int? @db.SmallInt
 
   endereco Endereco?
+  avaliacoes Avaliacao[]
 
   dhrCriacao DateTime @default(now()) @map("dhr_criacao")
   dhrAtualizacao DateTime @updatedAt @map("dhr_atualizacao")
@@ -41,4 +42,18 @@ model Endereco {
 
   @@map("endereco")
 
+}
+
+model Avaliacao {
+  id String @db.Uuid @id @default(uuid())
+  disciplina String @db.VarChar(30)
+  nota Decimal @db.Decimal(3, 1)
+  idAluno String @db.Uuid @map("id_aluno")
+
+  aluno Aluno @relation(fields: [idAluno], references: [id])
+
+  dhrCriacao DateTime @default(now()) @map("dhr_criacao")
+  dhrAtualizacao DateTime @updatedAt @map("dhr_atualizacao")
+
+  @@map("avaliacao")
 }
