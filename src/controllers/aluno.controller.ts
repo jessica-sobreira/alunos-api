@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Aluno } from "../models/aluno.model";
 import repository from "../database/prisma.repository";
+import { erroNaoEncontrado } from "../util/response.helper";
 // import { erroNaoEncontrado } from "../util/response.helper";
 
 export class AlunoController {
@@ -133,10 +134,7 @@ export class AlunoController {
             });
 
             if (!aluno) {
-                return res.status(404).send({
-                    ok: false,
-                    message: "Aluno não encontrado",
-                });
+                return erroNaoEncontrado(res, "Aluno");
             }
 
             // deletar o aluno
