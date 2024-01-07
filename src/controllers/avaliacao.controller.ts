@@ -29,6 +29,21 @@ export class AvaliacaoController {
 
             const avaliacao = new Avaliacao(disciplina, nota, alunoModel);
 
+            const result = await repository.avaliacao.create({
+                data: {
+                    id: avaliacao.id,
+                    disciplina: avaliacao.disciplina,
+                    nota: avaliacao.nota,
+                    idAluno: aluno.id,
+                },
+            })
+
+            return res.status(201).send({
+                ok: true,
+                message: "Avaliação criada com sucesso!",
+                data: result,
+            })
+
         } catch(error: any) {
             return erroServidor(res, error);
 
