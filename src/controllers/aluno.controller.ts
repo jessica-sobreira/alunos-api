@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Aluno } from "../models/aluno.model";
 import repository from "../database/prisma.repository";
 import { erroNaoEncontrado } from "../util/response.helper";
-// import { erroNaoEncontrado } from "../util/response.helper";
 
 export class AlunoController {
     // Criar um novo aluno
@@ -81,7 +80,7 @@ export class AlunoController {
                 });
             }
 
-            // verificar se o aluno existe
+        //Verificar se o aluno existe
             const aluno = await repository.aluno.findUnique({
                 where: {
                     id,
@@ -89,13 +88,10 @@ export class AlunoController {
             });
 
             if (!aluno) {
-                return res.status(404).send({
-                    ok: false,
-                    message: "Aluno não encontrado",
-                })
+                return erroNaoEncontrado(res, "Aluno");
             }
 
-            // atualizar os dados do aluno
+        //Atualizar os dados do aluno
             const result = await repository.aluno.update({
                 where: {
                     id,
@@ -137,7 +133,7 @@ export class AlunoController {
                 return erroNaoEncontrado(res, "Aluno");
             }
 
-            // deletar o aluno
+        //Deletar o aluno
             await repository.aluno.delete({
                 where: {
                     id,

@@ -10,6 +10,6 @@ export class Avaliacao {
     }
 }
 
-const jessica = new Aluno("Jessica", "jessica@me.com", "123456");
+const jessica = new Aluno("Jessica", "jessica@jessica.com", "123456");
 
 const avaliacaoJessica = new Avaliacao("Programação", 10, jessica);
